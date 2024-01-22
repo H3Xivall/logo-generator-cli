@@ -3,7 +3,7 @@ import shapes from "./shapes";
 
 const prompt = inquirer.createPromptModule();
 const Triangle = new shapes.Triangle();
-const Cirle = new shapes.Circle();
+const Circle = new shapes.Circle();
 const Square = new shapes.Square();
 const questions = [
     {
@@ -28,3 +28,15 @@ const questions = [
     }
 ];
 
+prompt(questions).then(answers => {
+    if(answers.shape === 'Circle') {
+        Circle(answers.text, answers.color);
+    } else if(answers.shape === 'Square') {
+        Square(answers.text, answers.color);
+    } else if(answers.shape === 'Triangle') {
+        Triangle(answers.text, answers.color);
+    } else {
+        console.log('Invalid shape');
+    };
+    
+})
