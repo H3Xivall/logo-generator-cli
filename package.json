@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/h3xivall/logo-generator-cli#readme",
   "dependencies": {
+    "eslint": "^8.56.0",
     "inquirer": "^9.2.12",
     "jest": "^29.7.0"
   }
