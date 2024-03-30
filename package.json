@@ -4,7 +4,7 @@
   "description": "A CLI that generates a logo to .svg file",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "bun index.js",
     "test": "jest"
   },
   "repository": {
