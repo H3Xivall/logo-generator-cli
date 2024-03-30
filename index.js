@@ -1,45 +1,49 @@
-// index
-import shapes from "./lib/shapes.js";
+const fs = require("fs");
+const createCanvas = require("./lib/canvas.js");
 const inquirer = require("inquirer");
 
-const prompt = inquirer.createPromptModule();
-const Triangle = new shapes.Triangle();
-const Circle = new shapes.Circle();
-const Square = new shapes.Square();
 const questions = [
   {
     type: "input",
     name: "text",
-    message: "Enter up to three letters",
-    validate: function (input) {
-      if (input.length > 3) {
-        return "Please enter up to three letters";
-      }
-      return true;
-    },
+    message: "What text would you like for your logo? (Max 3 characters)",
+  },
+  {
+    type: "input",
+    name: "tColor",
+    message:
+      "What color would you like the text to be? (Color Keyword or Hexadecimal only)",
   },
   {
     type: "list",
     name: "shape",
-    message: "Choose a shape",
+    message: "What shape would you like your logo to be?",
     choices: ["Circle", "Square", "Triangle"],
   },
   {
     type: "input",
-    name: "color",
-    message: "Enter a color keyword or hexadecimal number",
+    name: "shapeColor",
+    message:
+      "What color would you like the shape to be? (Color Keyword or Hexadecimal only)",
   },
 ];
 
-prompt(questions).then((answers) => {
-  if (answers.shape === "Circle") {
-    Circle(answers.text, answers.color);
-  } else if (answers.shape === "Square") {
-    Square(answers.text, answers.color);
-  } else if (answers.shape === "Triangle") {
-    Triangle(answers.text, answers.color);
-  } else {
-    console.log("Invalid shape");
-  }
-});
+function writeFile(fName, data) {
+  fs.writeFile(fName, data, (err) => {
+    if (err) {
+      return console.log(err);
+    }
+    console.log("The file has been saved!");
+  });
+}
+
+function init() {
+  console.log("SVG Generator: Please answer the following questions");
+
+  inquirer.prompt(questions).then((answer) => {
+    writeFile("logo.svg", createCanvas(answer));
+  });
+}
+
+init();
 
