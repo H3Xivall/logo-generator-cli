@@ -1,5 +1,5 @@
 const fs = require("fs");
-const createCanvas = require("./lib/canvas.js");
+const { createCanvas } = require("./lib/canvas.js");
 const inquirer = require("inquirer");
 
 const questions = [
@@ -46,4 +46,3 @@ function init() {
 }
 
 init();
-
